@@ -1,0 +1,54 @@
+extends layout.jade
+block content
+  canvas.player
+
+  script(id="pxsh-wave-warp" type="shader").
+    #define PI 3.1415926535897932384626433832795
+    varying vec2 vFilterCoord;
+    varying vec2 vTextureCoord;
+    uniform sampler2D uSampler;
+    uniform mat3 _mappedMatrix;
+    uniform mat3 _unmappedMatrix;
+    uniform float amplitude;
+    uniform float period;
+    uniform float waveform;
+    uniform float angle;
+    mat2 rotate2d(float _angle){
+      _angle = _angle * 2. * PI / 36. * 100.;
+      return mat2(cos(_angle),-sin(_angle),
+                  sin(_angle),cos(_angle));
+    }
+    float waveValue(float form, float x, float period) {
+      float y = 0.;
+      if (form < 0.001) {
+        // sine
+        y = sin(x * (1. / period));
+      } else if (form < 0.002) {
+        // square
+        y = (mod(x, period) < (period / 2.)) ? 1. : -1.;
+      } else if (form < 0.003) {
+        // sawtooth
+        y = (mod(-x, period) / period) * 2. - 1.;
+      }
+      return y;
+    }
+    void main(){
+      vec2 p = (vec3(vTextureCoord, 1.0) * _mappedMatrix).xy;
+      p = p * 2. - 1.;
+      p = rotate2d(angle) * p;
+      p.x += amplitude * waveValue(waveform, p.y, period);
+      p = rotate2d(-angle) * p;
+      p = p / 2. + 0.5;
+      vec4 texture = texture2D(uSampler, (vec3(p, 1.) * _unmappedMatrix).xy);
+      gl_FragColor = texture;
+    }
+  script(src="/script/pixi.js" type="application/javascript")
+  script(src="/script/pixi-lasagna-filters.js" type="application/javascript")
+  script(src="/script/sdk.js" type="application/javascript")
+  script(src="/script/audio-player.js" type="application/javascript")
+  script(src="/script/events.js" type="application/javascript")
+  script(src="/script/FileSaver.js" type="application/javascript")
+  script(src="/script/at.js" type="application/javascript")
+  script(src="/script/lasagna.js" type="application/javascript")
+  script(src="/script/tracks.js" type="application/javascript")
+

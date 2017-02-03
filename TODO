@@ -1,0 +1,23 @@
+TODO
+=========================================================
+
+[ ] layer positioning in stick to borders?
+[ ] add 5 soon placeholders
+
+
+
+
+[ ] update 3 childsplay tracks
+
+
+---
+
+[x] save date in lasagna file and order by date in index
+[x] save preview image in lasagna file
+[x] index layout and styles
+[x] bug copying files/ and style/ in player/ and lasagna/
+[x] create proper filenames
+[x] background images
+    [x] proper scaling
+    [x] keep centered
+    [x] save and load from files
