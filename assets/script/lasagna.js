@@ -101,6 +101,9 @@
 
     resizeRenderer: function (w, h) {
       this.rendererPX.resize(w, h);
+      each(this.layers, function (l) {
+        l.updateSpritePXposition();
+      });
       if (this.background_layer)
         this.makeLAYERSizeCover(this.background_layer);
     },
@@ -110,9 +113,6 @@
         document.body.offsetWidth,
         document.body.offsetHeight
       );
-      each(this.layers, function (l) {
-        l.updateSpritePXposition();
-      });
     },
 
 
