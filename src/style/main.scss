@@ -107,25 +107,25 @@ $nav-font-size: $font-size-lg;
   list-style: none;
   flex-wrap: wrap;
   max-width: 1200px;
+  @media (max-width: 550px) {
+    padding-left: $body-line-height / 2;
+    padding-right: $body-line-height / 2;
+  }
 }
 
 .grid__item {
   width: 25%;
-  padding: $body-line-height;
+  padding: $body-line-height / 2;
   box-sizing: border-box;
-}
-
-@media (max-width: 1000px) {
-  .grid__item {
+  @media (max-width: 1000px) {
     width: 33%;
   }
-}
-@media (max-width: 550px) {
-  .grid__item {
+  @media (max-width: 550px) {
     width: 50%;
-    padding: $body-line-height / 2;
+    padding: $body-line-height / 4;
   }
 }
+
 
 // TRACK
 // -----
