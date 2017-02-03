@@ -1,17 +1,17 @@
 TODO
 =========================================================
 
-[ ] layer positioning in stick to borders?
-[ ] add 5 soon placeholders
-
-
-
-
-[ ] update 3 childsplay tracks
-
+[ ] make editor video
+[ ] make layers interactive when droping lasagna file in bowl
+[ ] t uniform and add mode
+[ ] add loader and handle /track/# 404
+[ ] fix ios
+[ ] fix firefox
+[ ] scale all layers when renderer is small
 
 ---
 
+[x] layer positioning in stick to borders?
 [x] save date in lasagna file and order by date in index
 [x] save preview image in lasagna file
 [x] index layout and styles
