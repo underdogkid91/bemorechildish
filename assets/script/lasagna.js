@@ -110,6 +110,9 @@
         document.body.offsetWidth,
         document.body.offsetHeight
       );
+      each(this.layers, function (l) {
+        l.updateSpritePXposition();
+      });
     },
 
 
@@ -186,6 +189,9 @@
       );
       this.layers.unshift(l);
       this.background_layer = l;
+      l.x = '50%';
+      l.y = '50%';
+      l.updateSpritePXposition();
       this.makeLAYERSizeCover(l);
     },
 
@@ -206,11 +212,9 @@
       var width_scale = renderer_width / width;
       var height_scale = renderer_height / height;
       var scale = Math.max(width_scale, height_scale);
-      scale *= 1.2;
+      scale *= 1.2; // some xtra because of fxs padding
       l.spritePX.scale.x = scale;
       l.spritePX.scale.y = scale;
-      l.spritePX.position.x = renderer_width / 2;
-      l.spritePX.position.y = renderer_height / 2;
     },
 
     updateLayers: function () {
@@ -349,7 +353,7 @@
     this.spritePX = new PIXI.Sprite(this.texturePX);
     this.spritePX.anchor.set(0.5);
 
-    this.setSpritePXposition();
+    this.updateSpritePXposition();
 
     this.fxs = [];
     this.fxsFromDataArray(data_obj.fxs);
@@ -363,7 +367,7 @@
 
     // RENDERING STUFF
     // ---------------
-    setSpritePXposition: function () {
+    updateSpritePXposition: function () {
       var p = this.positionToWorld();
       this.spritePX.position.set(p.x, p.y);
     },
@@ -387,7 +391,7 @@
         if (typeof p === 'string') {
           if (p.match('%').length) {
             result[axis] = size;
-            result[axis] *= parseInt(p.replace('%', ''), 10);
+            result[axis] *= parseInt(p.replace('%', ''), 10) / 100;
           } else {
             p = parseInt(p, 10);
           }

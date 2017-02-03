@@ -158,7 +158,40 @@
       this.event_data = null;
       this.mousedown_position = null;
       this.spritePX.alpha = 1;
+
+      // generate position from world coordinates
+      var p = this.worldToPosition();
+      this.x = p.x;
+      this.y = p.y;
+      this.updateSpritePXposition();
+
       saveFileToLocalStorage();
+    },
+    worldToPosition: function () {
+      var world = {
+        x: this.spritePX.position.x,
+        y: this.spritePX.position.y
+      };
+      var renderer_width = this.BOWL.rendererPX.width;
+      var renderer_height = this.BOWL.rendererPX.height;
+      var result = {};
+      each(['x', 'y'], function (axis) {
+        var p = world[axis];
+        var size = (axis === 'x') ?
+          renderer_width : renderer_height;
+        // constraints
+        if (p < 0) p = 0;
+        if (p > size) p = size - 1;
+        var percentage = (p / size) * 100;
+        if (percentage < 25) { // padding left
+          result[axis] = p;
+        } else if (percentage > 75) { // padding right
+          result[axis] = -1 * (size - p);
+        } else { // percentage
+          result[axis] = percentage + '%';
+        }
+      });
+      return result;
     }
   });
 
