@@ -2,24 +2,31 @@
 
 source code for [childsplay](http://bemorechildish.surge.sh)
 
+table of contents
+- [development](#development)
+- [viz editor](#viz-editor)
+
+
+---
+
 ## development
 the site uses metalsmith to make a static site
 
-### setup
+**setup**
 install node.js and npm and clone this repo. then
 
 ```
 npm install
 ```
 
-### dev environment
+**dev environment**
 just run
 
 ```
 node index.js
 ```
 
-### deploy
+**deploy**
 this site is deployed to surge.sh. first time it will ask for
 credentials. if wanna deploy to a diferent domain edit Gruntfile.js
 
@@ -30,7 +37,7 @@ grunt surge
 ---
 
 
-# editor
+## viz editor
 visualizations can be created with the [editor](http://bemorechildish.surge.sh/𝔩𝔞𝔰𝔞𝔤𝔫𝔞/)
 
 user guide:
